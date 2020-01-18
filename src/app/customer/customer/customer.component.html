@@ -1,0 +1,87 @@
+<div fxLayout="column" fxLayoutAlign="center left">
+  <div>
+    <h1 class="mat-display-1">
+      {{ editingCustomer ? "Update" : "Add" }} customer
+    </h1>
+    <mat-card style="padding: 3rem;">
+      <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+        <div
+          fxLayout="row"
+          fxLayout.lt-md="column"
+          fxLayoutAlign="right"
+          fxLayoutGap="15px"
+        >
+          <mat-form-field class="w-full">
+            <input
+              type="text"
+              matInput
+              placeholder="First Name"
+              formControlName="firstName"
+            />
+            <mat-error>Invalid or missing First Name.</mat-error>
+          </mat-form-field>
+          <mat-form-field class="w-full">
+            <input
+              type="text"
+              matInput
+              placeholder="Last Name"
+              formControlName="lastName"
+            />
+            <mat-error>Invalid or missing Last Name.</mat-error>
+          </mat-form-field>
+        </div>
+
+        <div
+          fxLayout="row"
+          fxLayout.lt-md="column"
+          fxLayoutAlign="right"
+          fxLayoutGap="15px"
+        >
+          <mat-form-field class="w-full">
+            <input
+              type="email"
+              matInput
+              placeholder="Your email"
+              formControlName="email"
+              email
+              required
+            />
+            <mat-hint>Please enter a valid email.</mat-hint>
+            <mat-error>Invalid or missing email.</mat-error>
+          </mat-form-field>
+          <mat-form-field class="w-full">
+            <span matPrefix>+40 &nbsp;</span>
+            <input
+              type="tel"
+              formControlName="phoneNumber"
+              matInput
+              placeholder="Phone"
+            />
+            <mat-error>Invalid or missing phone.</mat-error>
+          </mat-form-field>
+        </div>
+        <div fxLayout="row" fxLayoutAlign="center center" class="w-full" style="margin-top: 1.5rem;">
+          <button
+            *ngIf="editingCustomer"
+            type="button"
+            mat-raised-button
+            [disabled]="disabledSubmit"
+            color="primary"
+            (click)="patchForm()"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            [disabled]="disabledSubmit && editingCustomer"
+            mat-raised-button
+            color="accent"
+            style="margin-left: 1rem;"
+          >
+            {{ editingCustomer ? "Update" : "Create" }}
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+</div>

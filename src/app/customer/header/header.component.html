@@ -1,0 +1,22 @@
+<mat-toolbar fxLayout="row" color="primary">
+  <mat-toolbar-row fxLayout="row">
+    <h1>
+      <a [routerLink]="'/'">
+        Customer Portal
+      </a>
+    </h1>
+    <span class="menu-spacer"></span>
+    <div fxLayoutAlign="end center" class="w-full">
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <button
+          mat-icon-button
+          (click)="logout()"
+          class="logout"
+          matTooltip="Logout"
+        >
+          <mat-icon>exit_to_app</mat-icon>
+        </button>
+      </div>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

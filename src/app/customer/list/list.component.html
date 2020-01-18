@@ -1,0 +1,89 @@
+<div class="w-full">
+  <div fxLayout="row" fxLayoutAlign="flex-end" class="button-create">
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="helperService.redirectTo('/customer/create')"
+    >
+      Add customer
+    </button>
+  </div>
+</div>
+
+<div class="mat-elevation-z8 data-table" *ngIf="dataSource">
+  <table mat-table [dataSource]="dataSource" class="w-full">
+    <!-- Id Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Id</th>
+      <td mat-cell *matCellDef="let element">{{ element.id }}</td>
+    </ng-container>
+
+    <!-- First Name Column -->
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef>First Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.firstName }}</td>
+    </ng-container>
+
+    <!-- Last Name Column -->
+    <ng-container matColumnDef="lastName">
+      <th mat-header-cell *matHeaderCellDef>Last Name</th>
+      <td mat-cell *matCellDef="let element">{{ element.lastName }}</td>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef>Email</th>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    </ng-container>
+
+    <!-- Phone Number Column -->
+    <ng-container matColumnDef="phoneNumber">
+      <th mat-header-cell *matHeaderCellDef>Phone Number</th>
+      <td mat-cell *matCellDef="let element">
+        <span matPrefix>+40 &nbsp;</span>{{ element.phoneNumber }}
+      </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef>Actions</th>
+      <td mat-cell *matCellDef="let element">
+        <div fxLayout="row">
+          <mat-icon
+            fxLayout
+            fxLayoutAlign="right center"
+            (click)="helperService.redirectTo('/customer/edit', element.id)"
+            >edit</mat-icon
+          >
+          <mat-icon
+            fxLayout
+            fxLayoutAlign="right center"
+            (click)="openDeleteDialog(element.id)"
+            >delete</mat-icon
+          >
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+</div>
+
+<ng-template #deleteDialog let-data>
+  <div fxLayout="column" fxLayoutGap="30px">
+    <mat-dialog-content>
+      <h2>Are you sure you want to delete this customer?</h2>
+    </mat-dialog-content>
+
+    <mat-dialog-actions fxLayout="row" fxLayoutGap="10px">
+      <button class="mat-raised-button" matDialogClose>Close</button>
+      <button
+        class="mat-raised-button mat-primary"
+        (click)="deleteCustomer(data)"
+      >
+        Confirm
+      </button>
+    </mat-dialog-actions>
+  </div>
+</ng-template>
